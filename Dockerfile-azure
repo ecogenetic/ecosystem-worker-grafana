@@ -1,0 +1,9 @@
+FROM grafana/grafana
+
+# ENV GF_INSTALL_PLUGINS=marcusolsson-json-datasource,volkovlabs-echarts-panel
+ENV GF_SECURITY_ALLOW_EMBEDDING=true
+
+COPY ./grafana/grafana-azure /var/lib/grafana
+RUN chmod -R 777 /var/lib/grafana
+
+EXPOSE 3000
