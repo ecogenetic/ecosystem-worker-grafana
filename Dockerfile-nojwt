@@ -1,0 +1,25 @@
+FROM grafana/grafana
+
+USER root
+
+
+COPY ./grafana/grafana.db /etc/grafana-db/grafana.db.template
+COPY ./grafana/plugins /etc/grafana-plugins/
+
+COPY entrypoint-nojwt.sh /entrypoint-nojwt.sh
+
+COPY jsonapi-datasource.template.yaml /etc/grafana/provisioning/datasources/
+COPY ./grafana/plugins /etc/grafana/provisioning/plugins/
+
+RUN mkdir -p /var/lib/grafana
+RUN mkdir -p /var/lib/grafana/plugins
+# COPY ./grafana/plugins /var/lib/grafana/plugins/
+RUN chmod 775 /var/lib/grafana
+
+RUN chmod +x /entrypoint-nojwt.sh
+
+ENV GF_SECURITY_ALLOW_EMBEDDING=true
+
+EXPOSE 3000
+
+ENTRYPOINT ["/entrypoint-nojwt.sh"]

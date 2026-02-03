@@ -15,7 +15,10 @@ sudo find . -type f -name ".DS_Store" -exec rm -f {} +
 sleep 2
 
 sudo find . -type f -name ".DS_Store" -exec rm -f {} +
-docker build --platform linux/amd64 -f Dockerfile -t ecosystemai/ecosystem-grafana:latest .
+docker build --no-cache --platform linux/amd64 -f Dockerfile -t ecosystemai/ecosystem-grafana:latest .
 
 sudo find . -type f -name ".DS_Store" -exec rm -f {} +
-docker build --platform linux/arm64 -f Dockerfile -t ecosystemai/ecosystem-grafana:arm64 .
+docker build --no-cache --platform linux/arm64 -f Dockerfile -t ecosystemai/ecosystem-grafana:arm64 .
+
+sudo find . -type f -name ".DS_Store" -exec rm -f {} +
+docker build --platform linux/amd64 -f Dockerfile-nojwt -t ecosystemai/ecosystem-grafana:nojwt .
