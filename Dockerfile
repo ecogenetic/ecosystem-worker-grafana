@@ -14,6 +14,9 @@ COPY jsonapi-datasource.template.yaml /etc/grafana/provisioning/datasources/
 RUN chmod +x /entrypoint.sh
 RUN chmod 775 /var/lib/grafana
 
+RUN touch /etc/environment && \
+    chmod 774 /etc/environment
+
 ENV GF_SECURITY_ALLOW_EMBEDDING=true
 ENV GF_PLUGINS_PREINSTALL=yesoreyeram-infinity-datasource,trino-datasource,marcusolsson-json-datasource,volkovlabs-echarts-panel
 ENV GF_AUTH_JWT_ENABLED=false
